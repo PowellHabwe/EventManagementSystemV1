@@ -1,0 +1,94 @@
+{% extends 'events/base.html' %} {% block content %} {% load static %}
+<!-- ##### Single Blog Area Start ##### -->
+<div class="single-blog-wrapper section-padding-0-100">
+  <!-- Single Blog Area  -->
+
+  <div class="container">
+    <img
+      src="{{ post.header_image.url  }}"
+      alt=""
+      style="height: 800px; max-width: 100%"
+    />
+    <div class="row">
+      <!-- ##### Post Content Area ##### -->
+      <div class="col-12 col-lg-9">
+        <!-- About Author -->
+        <div class="blog-post-author mt-100 d-flex">
+          <div class="author-thumbnail">
+            <img src="{{ user.profile.image.url }}" alt="" />
+          </div>
+          <div class="author-info">
+            <!-- Single Blog Area  -->
+            <div class="single-blog-area blog-style-2 mb-50">
+              <!-- Blog Content -->
+              <div class="single-blog-content">
+                <div class="line"></div>
+                <a href="#" class="post-tag"
+                  >{{ object.date_posted | date:"F d, Y"}}</a
+                >
+                <a
+                  href="{% url 'user-posts' object.author.username %}"
+                  class="post-tag"
+                  >By {{ object.author }}</a
+                >
+                <h4>
+                  <a href="#" class="post-headline mb-0">{{object.title}}</a>
+                </h4>
+                <div class="post-meta mb-50">
+                  <a
+                    style="background: black; height: 1.85em"
+                    class="btn btn-secondary btn-sm"
+                    href="{% url 'post-update' object.id %}"
+                    >sh{{ object.price }}</a
+                  >
+                  {% if object.author == user %}
+                  <p>
+                    <a
+                      class="btn btn-secondary btn-sm"
+                      style="color: white; background: black"
+                      href="{% url 'post-update' object.id %}"
+                      >Update The Event</a
+                    >
+                  </p>
+                  <p>
+                    <a
+                      style="color: white;"
+                      class="btn btn-danger btn-sm"
+                      href="{% url 'post-delete' object.id %}"
+                      >Delete Event</a
+                    >
+                  </p>
+
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="sidebar-widget-area">
+              <h5 class="title">{{ object.content }}</h5>
+            </div>
+            <div id="paypal-payment-button"></div>
+          </div>
+        </div>
+
+        <!-- ##### Sidebar Area ##### -->
+        <div class="col-12 col-md-4 col-lg-3">
+          <div class="post-sidebar-area">
+            <!-- Widget Area -->
+            {% comment %}
+            <div class="sidebar-widget-area">
+              <h5 class="title">Advertisement</h5>
+              <a href="#"
+                ><img src="{% static 'events/img/bg-img/add.gif' %}" alt=""
+              /></a>
+            </div>
+            {% endcomment %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ##### Single Blog Area End ##### -->
+
+
+  {% endblock content%}
+</div>

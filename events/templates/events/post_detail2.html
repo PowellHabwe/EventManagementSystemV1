@@ -1,0 +1,118 @@
+{% extends 'events/base3.html' %} 
+{% block content %} 
+{% load static %}
+<!-- ##### Single Blog Area Start ##### -->
+{% comment %} <div class="single-blog-wrapper section-padding-0-100">
+
+  <div class="container">
+    <img
+      src="{{ post.header_image.url  }}"
+      alt=""
+      style="height: 800px; max-width: 100%"
+    />
+    <div class="row">
+
+      <div class="col-12 col-lg-9">
+
+        <div class="blog-post-author mt-100 d-flex">
+          <div class="author-thumbnail">
+            <img src="{{ user.profile.image.url }}" alt="" />
+          </div>
+          <div class="author-info">
+ 
+            <div class="single-blog-area blog-style-2 mb-50">
+
+              <div class="single-blog-content">
+                <div class="line"></div>
+                <a href="#" class="post-tag"
+                  >{{ object.date_posted | date:"F d, Y"}}</a
+                >
+                <a
+                  href="{% url 'user-posts' object.author.username %}"
+                  class="post-tag"
+                  >By {{ object.author }}</a
+                >
+                <h4>
+                  <a href="#" class="post-headline mb-0">{{object.title}}</a>
+                </h4>
+                <div class="post-meta mb-50">
+                  <a
+                    style="background: black; height: 1.85em"
+                    class="btn btn-secondary btn-sm"
+                    href="{% url 'post-update' object.id %}"
+                    >sh{{ object.price }}</a
+                  >
+                  {% if object.author == user %}
+                  <p>
+                    <a
+                      class="btn btn-secondary btn-sm"
+                      style="color: white; background: black"
+                      href="{% url 'post-update' object.id %}"
+                      >Update The Event</a
+                    >
+                  </p>
+                  <p>
+                    <a
+                      style="color: white;"
+                      class="btn btn-danger btn-sm"
+                      href="{% url 'post-delete' object.id %}"
+                      >Delete Event</a
+                    >
+                  </p>
+
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="sidebar-widget-area">
+              <h5 class="title">{{ object.content }}</h5>
+            </div>
+            <div id="paypal-payment-button"></div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4 col-lg-3">
+          <div class="post-sidebar-area">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div> {% endcomment %}
+
+      <!-- holidays section start -->
+      <div class="holidays_section layout_padding" style="margin-top: 10em;">
+        <div class="container-fluid">
+           <div class="background_bg">
+              <div class="container">
+                 <div class="row">
+                    <div class="col-md-6">
+                       <div class="holiday_img" ><img style="margin-bottom: -6em;"  src="{{ post.header_image.url  }}"></div>
+                        <h2 class="holiday_text" >
+                        <p>Posted On: <a style="color: black;" href="#" class="post-tag">{{ object.date_posted | date:"F d, Y"}}</a></p>
+                        <p>Posted By: <a style="color: black;" href="{% url 'user-posts' object.author.username %}"class="post-tag">By {{ object.author }}</a></p>
+                        <p>Price: <a style="color: black;" href="#" class="post-tag">Ksh {{ object.price }}</a></p>
+                        </h2> 
+                    </div>
+                    <div class="col-md-6">
+                       <div class="holiday_taital_main">
+                          <h1 style="color: black;" class="holiday_taital">{{object.title}}</h1>
+                          <h2 style="color: black;"class="holiday_text">Description</h2>
+                          <p style="color: black;"class="dummy_text">{{ object.content }}</p>
+                          <div class="read_bt_2"><a href="#">Download Ticket</a></div>
+                          <div id="paypal-payment-button"></div>
+                          {% if object.author == user %}
+                          {% comment %} <div  style="margin-left: .3em;" class="read_bt_2"><a href="{% url 'post-update' object.id %}">Update Event</a></div>
+                          <div  style="margin-left: .3em;"class="read_bt_2"><a href="{% url 'post-delete' object.id %}">Delete Event</a></div> {% endcomment %}
+                          {% endif %}
+                        </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- holidays section end -->
+
+
+  {% endblock content%}

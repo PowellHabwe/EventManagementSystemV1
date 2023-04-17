@@ -1,0 +1,38 @@
+{% load static %}
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Event Ticket</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+  <link rel="stylesheet" href="{% static 'events/styles3.css' %}">
+</head>
+<body>
+  <div id="container">
+
+    <div class="ticket airline">
+      <div class="bottom">
+        it works
+      </div>
+    </div>
+  
+   
+  </div>
+
+   <button  onclick="generatePdf()">Download</button>
+
+</body>
+</html>
+
+
+<script>
+
+  function generatePdf() {
+    const element = document.getElementById('container');
+    html2pdf()
+    .from(element)
+    .save();
+    
+}
+
+</script>  

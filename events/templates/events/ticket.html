@@ -1,0 +1,88 @@
+{% load static %}
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Event Ticket</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+  <link rel="stylesheet" href="{% static 'events/styles3.css' %}">
+</head>
+<body>
+  <div id="container">
+
+    <div class="ticket airline">
+      <div class="top">
+        <h1>Entry pass</h1>
+        <h2 style="text-transform: uppercase;
+        font-size: 9.8px;
+        letter-spacing: 1;
+        text-align: center;
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        }">{{ticket.city}}-{{ticket.venue}}</h2>
+
+        <div class="big">
+          <p class="from">{{ticket.ticket_title}}</p>
+          {% comment %} <p class="to"><i class="fas fa-arrow-right"></i> SAN</p> {% endcomment %}
+        </div>
+         {% comment %} <div class="top--side">
+          <i class="fas fa-plane"></i>
+          <p>{{ticket.city}}</p>
+          <p>{{ticket.venue}}</p>
+        </div>  {% endcomment %}
+
+         
+      </div>
+      <div class="bottom">
+        <div class="column">
+          <div class="row row-1">
+            <p><span>Price</span>Sh{{ticket.ticket_price}}</p>
+            <p class="row--right"><span>Organiser</span>{{ticket.event_organiser}}</p>
+          </div>
+          <div class="row row-2">
+            <p><span>Date</span>{{ticket.date}}</p>
+            <p class="row--center"><span>Time</span>{{ticket.time}}</p>
+            
+          </div>
+          <div class="row row-3">
+            <p><span>Unique Identifier</span>{{ticket.uuid}}</p>
+            {% comment %} <p class="row--center"><span>Seat</span>11E</p>
+            <p class="row--right"><span>Group</span>3</p> {% endcomment %}
+          </div>
+        </div>
+        {% comment %} <div class="bar--code"></div> {% endcomment %}
+        <img src={{ticket.qr_code.url}} style="width:100px; margin-left: 4em;
+        margin-top: -2em
+        "/> 
+      </div>
+    </div>
+  
+   
+  </div>
+  {% comment %} <form action="" method="get">
+    <input type="hidden" name="post" value="{{ticket.id}}">
+    <button  onclick="generatePdf()">Download</button>
+  </form>  {% endcomment %}
+
+   <button style="background-color:black;color:white;
+   display: block;
+    margin-left: auto;
+    margin-right: auto"onclick="generatePdf()">Download</button>
+
+</body>
+</html>
+
+
+<script>
+
+  function generatePdf() {
+    const element = document.getElementById('container');
+    html2pdf()
+    .from(element)
+    .save();
+    
+}
+
+</script>  

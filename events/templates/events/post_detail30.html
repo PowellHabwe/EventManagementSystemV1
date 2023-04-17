@@ -1,0 +1,51 @@
+{% extends 'events/base3.html' %} 
+{% load crispy_forms_tags %}
+{% block content %} 
+{% load static %}
+      <!-- holidays section start -->
+      <div class="holidays_section layout_padding" style="margin-top: 10em;">
+        <div class="container-fluid">
+           <div class="background_bg">
+              <div class="container">
+                 <div class="row">
+                    <div class="col-md-6">
+                       <div class="holiday_img" ><img style="margin-bottom: -6em;"  src="{{ post.header_image.url  }}"></div>
+                        <h2 class="holiday_text" >
+                        {% if post.author == user %}
+                        <p>Your Withdrawal Code <a style="color: black;" href="#" class="post-tag">{{ post.uuid }}</a></p>
+                        {% endif %}
+                        <p>Posted On: <a style="color: black;" href="#" class="post-tag">{{ post.date_posted | date:"F d, Y"}}</a></p>
+                        <p>Posted By: <a style="color: black;" href="{% url 'user-posts' post.author.username %}"class="post-tag">By {{ post.author }}</a></p>
+                        <p>Price: <a style="color: black;" href="#" class="post-tag">Ksh {{ post.price }}</a></p>
+                        <p>Admin Withdrawal Code: <a style="color: black;" href="#" class="post-tag">{{ post.uuid }}</a></p>
+                        </h2> 
+
+
+                    </div>
+                    <div class="col-md-6">
+                       <div class="holiday_taital_main">
+                          <h1 style="color: black;" class="holiday_taital">{{post.title}}</h1>
+                          <h2 style="color: black;"class="holiday_text">Description</h2>
+                          <p style="color: black; font-size:8px;"class="dummy_text"><a>{{ post.content }}</a></p>
+                          {% comment %} <div class="read_bt_2"><a href="{% url 'pay_confirm' post.id post.uuid%}">By12 Ticket</a></div> {% endcomment %}
+                          {% comment %} <div class="read_bt_2"><button onclick="location.href='{% url 'post_detail2' post.pk post.uuid %}'">Buy Ticket Trial</button></div>  {% endcomment %}
+                          <div class="read_bt_2"><button onclick="location.href='{% url 'stkinfo' %}'">Buy Ticket</button></div>
+                          <div class="read_bt_2"><button onclick="location.href='{% url 'stkinfo' %}'">Info2 To Buy</button></div>
+                          {% comment %} <div id="paypal-payment-button"></div> {% endcomment %}
+                          {% if post.author == user %}
+                          <div  style="margin-left: .3em;" class="read_bt_2"><a href="{% url 'post-update' post.pk %}">Update Event</a></div>
+                          <div  style="margin-left: .3em;"class="read_bt_2"><a href="{% url 'post-delete' post.pk %}">Delete Event</a></div>
+                          {% comment %} <div  style="margin-left: .3em;"class="read_bt_2"><a href="{% url 'post-delete' post.pk %}">Find Your Event Totals</a></div> {% endcomment %}
+                          {% endif %}
+                        </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+     </div>
+     <!-- holidays section end -->
+
+
+  {% endblock content%}

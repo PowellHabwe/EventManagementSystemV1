@@ -1,0 +1,486 @@
+{% extends 'events/base.html' %} 
+{% block content %} {% load static %}
+<!-- ##### Hero Area Start ##### -->
+<div class="hero-area">
+  <!-- Hero Slides Area -->
+  <div class="hero-slides owl-carousel">
+    <!-- Single Slide -->
+    <div
+      class="single-hero-slide bg-img"
+      style="background-image: url({% static 'events/img/bg-img/b1.jpg' %})"
+    >
+      <div class="container h-100">
+        <div class="row h-100 align-items-center">
+          <div class="col-12">
+            <div class="slide-content text-center">
+              <div class="post-tag">
+                <a href="{% url 'events-home' %}" data-animation="fadeInUp">Maverick</a>
+              </div>
+              <h2 data-animation="fadeInUp" data-delay="250ms">
+                <a href="single-post.html"
+                  >Want to go on an adventure?</a
+                >
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Single Slide -->
+    <div
+      class="single-hero-slide bg-img"
+      style="background-image: url({% static 'events/img/bg-img/b2.jpg' %})"
+    >
+      <div class="container h-100">
+        <div class="row h-100 align-items-center">
+          <div class="col-12">
+            <div class="slide-content text-center">
+              <div class="post-tag">
+                <a href="#" data-animation="fadeInUp">Life</a>
+              </div>
+              <h2 data-animation="fadeInUp" data-delay="250ms">
+                <a href="single-post.html"
+                  >How about a rave?</a
+                >
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Single Slide -->
+    <div
+      class="single-hero-slide bg-img"
+      style="background-image: url({% static 'events/img/bg-img/b3.jpg' %})"
+    >
+      <div class="container h-100">
+        <div class="row h-100 align-items-center">
+          <div class="col-12">
+            <div class="slide-content text-center">
+              <div class="post-tag">
+                <a href="#" data-animation="fadeInUp">lifestyle</a>
+              </div>
+              <h2 data-animation="fadeInUp" data-delay="250ms">
+                <a href="single-post.html"
+                  >Need to attend a party or a concert by your favourite artist?</a
+                >
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ##### Hero Area End ##### -->
+
+<!-- ##### Blog Wrapper Start ##### -->
+<div class="blog-wrapper section-padding-100 clearfix">
+  <div class="container">
+    {% comment %} <div class="row align-items-end">
+    
+      <div class="col-12 col-lg-4">
+        <div class="single-blog-area clearfix mb-100">
+          <div class="single-blog-content">
+            <div class="line"></div>
+            <a href="#" class="post-tag">Maverick</a>
+            <h4>
+              <a href="#" class="post-headline"
+                >Welcome </a
+              >
+            </h4>
+            <p>
+              Curabitur venenatis efficitur lorem sed tempor. Integer aliquet
+              tempor cursus. Nullam vestibulum convallis risus vel condimentum.
+              Nullam auctor lorem in libero luctus, vel volutpat quam tincidunt.
+              Morbi sodales, dolor id ultricies dictum
+            </p>
+            <a href="#" class="btn original-btn">Read More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="single-catagory-area clearfix mb-100">
+          <img src="{% static 'events/img/blog-img/1.jpg'%}" alt="" />
+         
+          <div class="catagory-title">
+            <a href="#">Lifetime Memories</a>
+          </div>
+        </div>
+      </div>
+     
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="single-catagory-area clearfix mb-100">
+          <img src="{% static 'events/img/blog-img/2.jpg'%}" alt="" />
+
+          <div class="catagory-title">
+            <a href="#">Lifetime Adventures</a>
+          </div>
+        </div>
+      </div>
+    </div> {% endcomment %}
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-9">
+        {% for post in posts %}
+        <!-- Single Blog Area  -->
+        <div
+          class="single-blog-area blog-style-2 mb-50 wow fadeInUp"
+          data-wow-delay="0.5s"
+          data-wow-duration="1000ms"
+        >
+          <div class="row align-items-center">
+            <div class="col-12 col-md-6">
+              <div class="single-blog-thumbnail">
+                <img src="{{ post.header_image.url  }}" alt="" />
+                <div class="post-date">
+                  <a href="#"
+                    >{{ post.date_posted | date:"d"}}<span
+                      >{{ post.date_posted | date:"F"}}</span
+                    ></a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <!-- Blog Content -->
+              <div class="single-blog-content">
+                <div class="line"></div>
+                <a href="#" class="post-tag"
+                  >{{ post.date_posted | date:"F d, Y"}}</a
+                >
+                <h4>
+                  <a
+                  href="{% url 'post_detail' post.pk %}"
+                    class="post-headline"
+                    >{{post.title}}</a
+                  >
+                </h4>
+                <p>{{ post.content }}</p>
+                <div class="post-meta">
+                  <p>By <a href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a></p>
+                  <p style="color:#0d0d0d;">Ksh <a href="#" style="font-size:20px;">{{ post.price }}</a></p>
+                 
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %} 
+        {% if is_paginated %}
+
+            {% if page_obj.has_previous %}
+                <a class="btn btn-outline-info" href="?page=1">First</a>
+                <a class="btn btn-outline-info" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a class="btn btn-info" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}  
+                    <a class="btn btn-outline-info" href="?page={{ num }}">{{ num }}</a>  
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a class="btn btn-outline-info" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="btn btn-outline-info" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}
+
+        {% endif %}
+        <!-- Single Blog Area  -->
+        <div
+          class="single-blog-area blog-style-2 mb-50 wow fadeInUp"
+          data-wow-delay="0.4s"
+          data-wow-duration="1000ms"
+        >
+          <div class="row">
+            <div class="col-12">
+              <div class="single-blog-thumbnail">
+                <img src="{% static 'events/img/blog-img/7.jpg' %}" alt="" />
+                <div class="post-date">
+                  <a href="#">10 <span>march</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <!-- Blog Content -->
+              <div class="single-blog-content mt-50">
+                <div class="line"></div>
+                <a href="#" class="post-tag">Lifestyle</a>
+                <h4>
+                  <a href="#" class="post-headline"
+                    >10 Tips to organize the perfect party</a
+                  >
+                </h4>
+                <p>
+                  Curabitur venenatis efficitur lorem sed tempor. Integer
+                  aliquet tempor cursus. Nullam vestibulum convallis risus vel
+                  condimentum. Nullam auctor lorem in libero luctus, vel
+                  volutpat quam tincidunt.
+                </p>
+                <div class="post-meta">
+                  <p>By <a href="#">james smith</a></p>
+                  <p>3 comments</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Load More -->
+        <div
+          class="load-more-btn mt-100 wow fadeInUp"
+          data-wow-delay="0.7s"
+          data-wow-duration="1000ms"
+        >
+          <a href="#" class="btn original-btn">Read More</a>
+        </div>
+      </div>
+
+      <!-- ##### Sidebar Area ##### -->
+      <div class="col-12 col-md-4 col-lg-3">
+        <div class="post-sidebar-area">
+
+          <!-- Widget Area -->
+          <div class="sidebar-widget-area">
+            <form action="#" class="search-form">
+              <input
+                type="search"
+                name="search"
+                id="searchForm"
+                placeholder="Search"
+              />
+              <input type="submit" value="submit" />
+            </form>
+          </div>
+
+          <p>For those who want to post events,create a post about the event,in the detail page of the post there is 
+            a withdrawal id only seen by you and will be used in the admin withdraw when you want to withdraw your proceedings.Make sure you generate the ticket
+          </p>
+          <p>For those buying event tickets,use the generate ticket tab after paying for your ticket of choice.</p>
+
+          <!-- Widget Area -->
+          <div class="sidebar-widget-area">
+            <h5 class="title">Advertisement</h5>
+            <a href="#"
+              ><img src="{% static 'events/img/bg-img/add.gif'%} " alt=""
+            /></a>
+          </div>
+
+          <!-- Widget Area -->
+          <div class="sidebar-widget-area">
+            <h5 class="title">Latest Posts</h5>
+
+            <div class="widget-content">
+              <!-- Single Blog Post -->
+              <div
+                class="single-blog-post d-flex align-items-center widget-post"
+              >
+                <!-- Post Thumbnail -->
+                <div class="post-thumbnail">
+                  <img
+                    src="{% static 'events/img/blog-img/lp1.jpg' %}"
+                    alt=""
+                  />
+                </div>
+                <!-- Post Content -->
+                <div class="post-content">
+                  <a href="#" class="post-tag">Lifestyle</a>
+                  <h4>
+                    <a href="#" class="post-headline"
+                      >Party people in the house</a
+                    >
+                  </h4>
+                  <div class="post-meta">
+                    <p><a href="#">12 March</a></p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Single Blog Post -->
+              <div
+                class="single-blog-post d-flex align-items-center widget-post"
+              >
+                <!-- Post Thumbnail -->
+                <div class="post-thumbnail">
+                  <img
+                    src="{% static 'events/img/blog-img/lp2.jpg'%} "
+                    alt=""
+                  />
+                </div>
+                <!-- Post Content -->
+                <div class="post-content">
+                  <a href="#" class="post-tag">Lifestyle</a>
+                  <h4>
+                    <a href="#" class="post-headline">A sunday in the park</a>
+                  </h4>
+                  <div class="post-meta">
+                    <p><a href="#">12 March</a></p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Single Blog Post -->
+              <div
+                class="single-blog-post d-flex align-items-center widget-post"
+              >
+                <!-- Post Thumbnail -->
+                <div class="post-thumbnail">
+                  <img
+                    src="{% static 'events/img/blog-img/lp3.jpg'%} "
+                    alt=""
+                  />
+                </div>
+                <!-- Post Content -->
+                <div class="post-content">
+                  <a href="#" class="post-tag">Lifestyle</a>
+                  <h4>
+                    <a href="#" class="post-headline"
+                      >Party people in the house</a
+                    >
+                  </h4>
+                  <div class="post-meta">
+                    <p><a href="#">12 March</a></p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Single Blog Post -->
+              <div
+                class="single-blog-post d-flex align-items-center widget-post"
+              >
+                <!-- Post Thumbnail -->
+                <div class="post-thumbnail">
+                  <img
+                    src="{% static 'events/img/blog-img/lp4.jpg'%} "
+                    alt=""
+                  />
+                </div>
+                <!-- Post Content -->
+                <div class="post-content">
+                  <a href="#" class="post-tag">Lifestyle</a>
+                  <h4>
+                    <a href="#" class="post-headline">A sunday in the park</a>
+                  </h4>
+                  <div class="post-meta">
+                    <p><a href="#">12 March</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Widget Area -->
+          {% comment %} <div class="sidebar-widget-area">
+            <h5 class="title">Tags</h5>
+            <div class="widget-content">
+              <ul class="tags">
+                <li><a href="#">design</a></li>
+                <li><a href="#">fashion</a></li>
+                <li><a href="#">travel</a></li>
+                <li><a href="#">music</a></li>
+                <li><a href="#">party</a></li>
+                <li><a href="#">video</a></li>
+                <li><a href="#">photography</a></li>
+                <li><a href="#">adventure</a></li>
+              </ul>
+            </div>
+          </div> {% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ##### Blog Wrapper End ##### -->
+
+<!-- ##### Instagram Feed Area Start ##### -->
+<div class="instagram-feed-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="insta-title">
+          <h5>Follow us @ Instagram</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Instagram Slides -->
+  <div class="instagram-slides owl-carousel">
+    <!-- Single Insta Feed -->
+    <div class="single-insta-feed">
+      <img src="{% static 'events/img/instagram-img/1.png'%}" alt="" />
+      <!-- Hover Effects -->
+      <div class="hover-effects">
+        <a href="#" class="d-flex align-items-center justify-content-center"
+          ><i class="fa fa-instagram"></i
+        ></a>
+      </div>
+    </div>
+    <!-- Single Insta Feed -->
+    <div class="single-insta-feed">
+      <img src="{% static 'events/img/instagram-img/2.png'%}" alt="" />
+      <!-- Hover Effects -->
+      <div class="hover-effects">
+        <a href="#" class="d-flex align-items-center justify-content-center"
+          ><i class="fa fa-instagram"></i
+        ></a>
+      </div>
+    </div>
+    <!-- Single Insta Feed -->
+    <div class="single-insta-feed">
+      <img src="{% static 'events/img/instagram-img/3.png'%}" alt="" />
+      <!-- Hover Effects -->
+      <div class="hover-effects">
+        <a href="#" class="d-flex align-items-center justify-content-center"
+          ><i class="fa fa-instagram"></i
+        ></a>
+      </div>
+    </div>
+    <!-- Single Insta Feed -->
+    <div class="single-insta-feed">
+      <img src="{% static 'events/img/instagram-img/4.png'%}" alt="" />
+      <!-- Hover Effects -->
+      <div class="hover-effects">
+        <a href="#" class="d-flex align-items-center justify-content-center"
+          ><i class="fa fa-instagram"></i
+        ></a>
+      </div>
+    </div>
+    <!-- Single Insta Feed -->
+    <div class="single-insta-feed">
+      <img src="{% static 'events/img/instagram-img/5.png'%}" alt="" />
+      <!-- Hover Effects -->
+      <div class="hover-effects">
+        <a href="#" class="d-flex align-items-center justify-content-center"
+          ><i class="fa fa-instagram"></i
+        ></a>
+      </div>
+    </div>
+    <!-- Single Insta Feed -->
+    <div class="single-insta-feed">
+      <img src="{% static 'events/img/instagram-img/6.png'%}" alt="" />
+      <!-- Hover Effects -->
+      <div class="hover-effects">
+        <a href="#" class="d-flex align-items-center justify-content-center"
+          ><i class="fa fa-instagram"></i
+        ></a>
+      </div>
+    </div>
+    <!-- Single Insta Feed -->
+    <div class="single-insta-feed">
+      <img src="{% static 'events/img/instagram-img/7.png'%}" alt="" />
+      <!-- Hover Effects -->
+      <div class="hover-effects">
+        <a href="#" class="d-flex align-items-center justify-content-center"
+          ><i class="fa fa-instagram"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content%}
+
