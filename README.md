@@ -13,5 +13,5 @@ UUID's replace generic id fields to buffer site security.
 Create a virtual environment and install dependencies from the requirements file
 
 Run the file,make migrations and create a superuserto access the admin dashboard
-# EventManagementSystem1
-# EventManagementSystemV1
+
+
