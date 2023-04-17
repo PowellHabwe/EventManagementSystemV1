@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-_s$(c8$^lq3k@(ki*zz$5quf3_5)(l_k@#2pur4_u^xllohd39
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS=['https://eventmanagementsystemv1-production.up.railway.app/']
+CSRF_TRUSTED_ORIGINS=['https://eventmanagementsystemv1-production.up.railway.app']
 
 
 # Application definition
